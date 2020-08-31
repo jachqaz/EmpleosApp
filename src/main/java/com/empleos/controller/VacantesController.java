@@ -12,7 +12,7 @@ public class VacantesController {
     @GetMapping("/view/{id}")
     public String verDetalle(@PathVariable("id") String idVacante, Model model) {
         System.out.println("IdVacante" + idVacante);
-        model.addAttribute("idVacante"+idVacante);
+        model.addAttribute("idVacante",idVacante);
         return "vacantes/detalle";
     }
 }
