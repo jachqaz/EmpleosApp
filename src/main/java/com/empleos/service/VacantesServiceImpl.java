@@ -1,16 +1,16 @@
 package com.empleos.service;
 
 import com.empleos.model.Vacante;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
+@Service
 public class VacantesServiceImpl implements IVacanteService {
     private List<Vacante> lista;
-
-
     public VacantesServiceImpl() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         lista = new LinkedList<Vacante>();
