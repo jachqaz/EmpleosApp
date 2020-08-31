@@ -72,4 +72,9 @@ public class VacantesServiceImpl implements IVacanteService {
     public List<Vacante> buscarTodas() {
         return lista;
     }
+
+    @Override
+    public Vacante buscarPorId(Integer idVacante) {
+        return  lista.stream().filter(vacante -> vacante.getId().equals(idVacante)).findFirst().get();
+    }
 }
