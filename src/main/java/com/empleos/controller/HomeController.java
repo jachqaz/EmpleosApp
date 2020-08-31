@@ -96,6 +96,7 @@ public class HomeController {
             vacante3.setFecha(sdf.parse("10-02-2019"));
             vacante3.setSalario(10500.0);
             vacante3.setDestacado(0);
+            vacante3.setImagen("no-image.png");
 
             // Creamos la oferta de Trabajo 4.
             Vacante vacante4 = new Vacante();
