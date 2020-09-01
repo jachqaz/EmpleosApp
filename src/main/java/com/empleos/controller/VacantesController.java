@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class VacantesController {
     }
 
     @PostMapping("/save")
-    public String Guardar(Vacante vacante, BindingResult result) {
+    public String Guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             for (ObjectError error : result.getAllErrors()) {
                 System.out.println("Ocurrio un error" + error.getDefaultMessage());
@@ -59,6 +60,7 @@ public class VacantesController {
             return "vacantes/formVacante";
         }
         serviceVacantes.guardar(vacante);
+        attributes.addFlashAttribute("msg","Registro Guardado");
         System.out.println("Nombre" + vacante);
         return "redirect:/vacantes/index";
     }
