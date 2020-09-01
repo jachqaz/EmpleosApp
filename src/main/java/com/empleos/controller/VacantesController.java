@@ -1,6 +1,7 @@
 package com.empleos.controller;
 
 import com.empleos.model.Vacante;
+import com.empleos.service.ICategoriasService;
 import com.empleos.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +22,9 @@ import java.util.List;
 public class VacantesController {
     @Autowired
     private IVacanteService serviceVacantes;
+
+    @Autowired
+    private ICategoriasService servicesCategorias;
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
@@ -47,7 +51,8 @@ public class VacantesController {
     }
 
     @GetMapping("/create")
-    public String crear(Vacante vacante) {
+    public String crear(Vacante vacante, Model model) {
+        model.addAttribute("categorias", servicesCategorias.buscarTodas());
         return "vacantes/formVacante";
     }
 
