@@ -60,7 +60,7 @@ public class VacantesController {
         }
         serviceVacantes.guardar(vacante);
         System.out.println("Nombre" + vacante);
-        return "vacantes/lisTvacantes";
+        return "redirect:/vacantes/index";
     }
 
     @GetMapping("/index")
