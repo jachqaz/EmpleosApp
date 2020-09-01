@@ -60,13 +60,16 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Titulo de la oferta de trabajo" required="required">
+                    <input class="form-control" id="nombre" name="nombre" placeholder="Titulo de la oferta de trabajo"
+                           required="required" th:field="*{nombre}" type="text">
                   </div>
                 </div>
                 <div class="col-md-9"> 
                   <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Breve descripcion de la oferta de trabajo" required="required">
+                    <input class="form-control" id="descripcion" name="descripcion"
+                           placeholder="Breve descripcion de la oferta de trabajo" required="required"
+                           th:field="*{descripcion}" type="text">
                   </div> 
                 </div>    
               </div>    
@@ -87,27 +90,30 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="estatus">Estatus</label>
-                    <select class="form-control" name="estatus" id="estatus">
-					  <option value="Creada">Creada</option>
+                    <select class="form-control" id="estatus" name="estatus" th:field="*{estatus}">
+                      <option value="Creada">Creada</option>
                       <option value="Aprobada">Aprobada</option>
-                      <option value="Eliminada">Eliminada</option>	
+                      <option value="Eliminada">Eliminada</option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="fecha">Fecha de Publicación</label>
-                    <input type="text" class="form-control" name="fecha" id="fecha" placeholder="Fecha de publicacion" required="required">
+                    <input class="form-control" id="fecha" name="fecha" placeholder="Fecha de publicacion"
+                           required="required" th:field="*{fecha}" type="text">
                   </div>  
                 </div>
                 <div class="col-md-3"> 
                   <div class="form-check">
                     <label class="form-check-label" for="destacado0"></label><br>
-                    <input class="form-check-input" type="radio" name="destacado" id="destacado" value="1" checked="checked">
+                    <input checked="checked" class="form-check-input" id="destacado" name="destacado"
+                           th:field="*{destacado}" type="radio" value="1">
                     <label class="form-check-label" for="destacado1">Destacado</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="destacado" id="destacado" value="0">
+                    <input class="form-check-input" id="destacado" name="destacado" th:field="*{destacado}" type="radio"
+                           value="0">
                     <label class="form-check-label" for="destacado2">No Destacado</label>
                   </div>
                 </div>
@@ -116,7 +122,8 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="salario">Salario Ofrecido (Aprox)</label>
-                    <input type="text" class="form-control" name="salario" id="salario" placeholder="Salario aproximado." required="required">
+                    <input class="form-control" id="salario" name="salario" placeholder="Salario aproximado."
+                           required="required" th:field="*{salario}" type="text">
                   </div>
                 </div>
                 <div class="col-md-3"> 
@@ -130,8 +137,9 @@
               <div class="row">
                 <div class="col-md-9"> 
                   <div class="form-group">
-                    <label for="detalles"><strong>Detalles</strong></label>          
-                    <textarea class="form-control" name="detalles" id="detalles" rows="7"></textarea>
+                    <label for="detalles"><strong>Detalles</strong></label>
+                    <textarea class="form-control" id="detalles" name="detalles" rows="7"
+                              th:field="*{detalles}"></textarea>
                   </div> 
                 </div> 
                 <div class="col-md-3">
