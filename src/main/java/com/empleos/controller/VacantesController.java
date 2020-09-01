@@ -36,8 +36,8 @@ public class VacantesController {
     }
 
     @PostMapping("/save")
-    public String Guardar(@RequestParam("nombre") String nombre, @RequestParam("descripcion") String descripcion) {
-        System.out.println("Nombre" + nombre);
+    public String Guardar(Vacante vacante) {
+        System.out.println("Nombre" + vacante);
         return "vacantes/lisTvacantes";
     }
 }
