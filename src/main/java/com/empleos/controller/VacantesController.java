@@ -3,6 +3,7 @@ package com.empleos.controller;
 import com.empleos.model.Vacante;
 import com.empleos.service.ICategoriasService;
 import com.empleos.service.IVacanteService;
+import com.empleos.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
@@ -57,15 +59,22 @@ public class VacantesController {
     }
 
     @PostMapping("/save")
-    public String Guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes) {
+    public String Guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes, @RequestParam("archivoImagen") MultipartFile multipartFile) {
         if (result.hasErrors()) {
             for (ObjectError error : result.getAllErrors()) {
                 System.out.println("Ocurrio un error" + error.getDefaultMessage());
             }
             return "vacantes/formVacante";
         }
+        if (!multipartFile.isEmpty()) {
+            String ruta = "c:/tmp";
+            String nombreImagen = Utileria.guardarArchivo(multipartFile, ruta);
+            if (nombreImagen != null) {
+                vacante.setImagen(nombreImagen);
+            }
+        }
         serviceVacantes.guardar(vacante);
-        attributes.addFlashAttribute("msg","Registro Guardado");
+        attributes.addFlashAttribute("msg", "Registro Guardado");
         System.out.println("Nombre" + vacante);
         return "redirect:/vacantes/index";
     }
