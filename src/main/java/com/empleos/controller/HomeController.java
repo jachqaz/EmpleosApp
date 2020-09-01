@@ -23,14 +23,16 @@ public class HomeController {
     public String mostrarHome(Model model) {
 //        model.addAttribute("mensaje", "Binvenidos a Empleos");
 //        model.addAttribute("fecha", new Date());
-        String nombre = "Auxiliar de Contabilidad";
-        Date fechaPub = new Date();
-        double salario = 9000.0;
-        boolean vigente = true;
-        model.addAttribute("nombre", nombre);
-        model.addAttribute("fechaPub", fechaPub);
-        model.addAttribute("salario", salario);
-        model.addAttribute("vigente", vigente);
+//        String nombre = "Auxiliar de Contabilidad";
+//        Date fechaPub = new Date();
+//        double salario = 9000.0;
+//        boolean vigente = true;
+//        model.addAttribute("nombre", nombre);
+//        model.addAttribute("fechaPub", fechaPub);
+//        model.addAttribute("salario", salario);
+//        model.addAttribute("vigente", vigente);
+        List<Vacante> lista = vacanteService.buscarTodas();
+        model.addAttribute("vacantes", lista);
         return "home";
     }
 
