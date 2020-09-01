@@ -80,7 +80,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="categoria">Categoría</label>
-                                <select class="form-control" id="categoria" name="categoria">
+                                <select class="form-control" id="categoria" name="categoria" th:field="*{categoria.id}">
                                     <option th:each="categoria : ${categorias}" th:text="${categoria.nombre}"
                                             th:value="${categoria.id}">Ventas
                                     </option>
