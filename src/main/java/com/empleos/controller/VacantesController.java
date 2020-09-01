@@ -46,7 +46,7 @@ public class VacantesController {
     }
 
     @GetMapping("/create")
-    public String crear() {
+    public String crear(Vacante vacante) {
         return "vacantes/formVacante";
     }
 
@@ -56,7 +56,7 @@ public class VacantesController {
             for (ObjectError error : result.getAllErrors()) {
                 System.out.println("Ocurrio un error" + error.getDefaultMessage());
             }
-            return "vacantes/lisTvacantes";
+            return "vacantes/formVacante";
         }
         serviceVacantes.guardar(vacante);
         System.out.println("Nombre" + vacante);
