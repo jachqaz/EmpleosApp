@@ -3,15 +3,27 @@ package com.empleos.controller;
 import com.empleos.model.Vacante;
 import com.empleos.service.IVacanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/vacantes")
 public class VacantesController {
     @Autowired
     private IVacanteService serviceVacantes;
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.registerCustomEditor(
+                Date.class,
+                new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), false));
+    }
 
     @GetMapping("/view/{id}")
     public String verDetalle(@PathVariable("id") int idVacante, Model model) {

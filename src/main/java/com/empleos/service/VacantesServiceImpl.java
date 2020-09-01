@@ -77,4 +77,9 @@ public class VacantesServiceImpl implements IVacanteService {
     public Vacante buscarPorId(Integer idVacante) {
         return  lista.stream().filter(vacante -> vacante.getId().equals(idVacante)).findFirst().get();
     }
+
+    @Override
+    public void guardar(Vacante vacante) {
+        lista.add(vacante);
+    }
 }
