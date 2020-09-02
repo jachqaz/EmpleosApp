@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="empleos" target="1.8" />
-      <module name="jpa-demo" target="11" />
+      <module name="jpa-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
