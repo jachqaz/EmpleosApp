@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <link href="favicon.ico" rel="icon">
+
+    <title>EmpleosApp | Listado de Ofertas de Trabajo</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/jumbotron.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/sticky-footer-navbar.css}">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:insert="fragments/menu :: menu-principal"></header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Listado de Ofertas de Trabajo</strong></h4>
+            <div class="card-body">
+                <a class="btn btn-primary" role="button" th:href="@{/vacantes/create}"
+                   title="Crear nueva Oferta de Trabajo"><i aria-hidden="true" class="fas fa-file"></i> Nueva</a>
+                <hr>
+                <div class="alert alert-success" role="alert" th:if="${msg !=null}" th:text="${msg}"></div>
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha Pub.</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Destacada</th>
+                        <th scope="col">Operaciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vacante : ${vacantes}">
+                        <td></td>
+                        <td th:text="${vacante.nombre}"></td>
+                        <td th:text="${vacante.fecha}"></td>
+                        <td th:text="${vacante.estatus}"></td>
+                        <td th:text="${vacante.destacado==1 ? 'SI' : 'NO' }"></td>
+                        <td>
+                            <a class="btn btn-success btn-sm" href="#" role="button" title="Editar el registro."><i
+                                    aria-hidden="true" class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-success btn-sm" href="#" onclick="return confirm('¿Estas seguro?')"
+                               role="button" title="Eliminar el registro."><i aria-hidden="true"
+                                                                              class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+</main>
+
+<footer class="footer" th:insert="fragments/footer :: pie-pagina"></footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
