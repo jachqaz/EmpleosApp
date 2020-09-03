@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		System.out.println("Ejemplos de Spring Data JPA");
 //		eliminarTodos();
+//		borrarTodosEnBloque();
 		conteo();
 		guardar();
 		buscarPorId();
@@ -33,6 +35,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		buscarTodos();
 		existeId();
 		guardarTodas();
+		buscarTodosJpa();
+		buscarTodosOrdenados();
 //		eliminar();
 //		System.out.println(repo);
 	}
@@ -109,5 +113,19 @@ public class JpaDemoApplication implements CommandLineRunner {
 		lista.add(catTmp);
 		lista.add(catTmp);
 		repo.saveAll(lista);
+	}
+
+	private void buscarTodosJpa() {
+		List<Categoria> categorias = repo.findAll();
+		categorias.forEach(System.out::println);
+	}
+
+	private void borrarTodosEnBloque() {
+		repo.deleteAllInBatch();
+	}
+
+	private void buscarTodosOrdenados() {
+		List<Categoria> categorias = repo.findAll(Sort.by("id").descending());
+		categorias.forEach(System.out::println);
 	}
 }
