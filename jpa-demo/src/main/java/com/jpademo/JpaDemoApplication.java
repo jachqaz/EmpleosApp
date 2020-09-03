@@ -25,6 +25,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 		guardar();
 		buscarPorId();
 		modificar();
+		eliminar();
 //		System.out.println(repo);
 	}
 
@@ -38,7 +39,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	}
 
 	private void buscarPorId() {
-		Optional<Categoria> optional = repo.findById(1);
+		Optional<Categoria> optional = repo.findById(2);
 		if (optional.isPresent()) {
 			System.out.println(optional.get());
 		} else {
@@ -47,7 +48,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	}
 
 	private void modificar() {
-		Optional<Categoria> optional = repo.findById(1);
+		Optional<Categoria> optional = repo.findById(2);
 		if (optional.isPresent()) {
 			Categoria catTmp = optional.get();
 			catTmp.setNombre("Ingenieria de software");
@@ -59,4 +60,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		}
 	}
 
+	private void eliminar() {
+		int idCategoria = 1;
+		repo.deleteById(idCategoria);
+	}
 }
