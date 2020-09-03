@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -22,11 +24,13 @@ public class JpaDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		System.out.println("Ejemplos de Spring Data JPA");
+//		eliminarTodos();
+		conteo();
 		guardar();
 		buscarPorId();
 		modificar();
+		encontrarPorIds();
 //		eliminar();
-		conteo();
 //		System.out.println(repo);
 	}
 
@@ -40,7 +44,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	}
 
 	private void buscarPorId() {
-		Optional<Categoria> optional = repo.findById(2);
+		Optional<Categoria> optional = repo.findById(8);
 		if (optional.isPresent()) {
 			System.out.println(optional.get());
 		} else {
@@ -49,7 +53,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 	}
 
 	private void modificar() {
-		Optional<Categoria> optional = repo.findById(2);
+		Optional<Categoria> optional = repo.findById(8);
 		if (optional.isPresent()) {
 			Categoria catTmp = optional.get();
 			catTmp.setNombre("Ingenieria de software");
@@ -69,5 +73,17 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void conteo() {
 		long count = repo.count();
 		System.out.println("Total Catergorias " + count);
+	}
+
+	private void eliminarTodos() {
+		repo.deleteAll();
+	}
+
+	private void encontrarPorIds() {
+		List<Integer> ids = new LinkedList<>();
+		ids.add(8);
+		ids.add(9);
+		Iterable<Categoria> categorias = repo.findAllById(ids);
+		categorias.forEach(System.out::println);
 	}
 }
