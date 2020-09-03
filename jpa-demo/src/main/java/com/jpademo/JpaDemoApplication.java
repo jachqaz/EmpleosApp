@@ -31,6 +31,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 		modificar();
 		encontrarPorIds();
 		buscarTodos();
+		existeId();
 //		eliminar();
 //		System.out.println(repo);
 	}
@@ -91,5 +92,10 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void buscarTodos() {
 		Iterable<Categoria> categorias = repo.findAll();
 		categorias.forEach(System.out::println);
+	}
+
+	private void existeId() {
+		boolean existe = repo.existsById(14);
+		System.out.println("La categoria existe: " + existe);
 	}
 }
