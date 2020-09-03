@@ -1,8 +1,11 @@
 package com.jpademo;
 
 import com.jpademo.model.Categoria;
+import com.jpademo.model.Perfil;
 import com.jpademo.model.Vacante;
 import com.jpademo.repository.CategoriasRepository;
+import com.jpademo.repository.PerfilesRepository;
+import com.jpademo.repository.UsuariosRepository;
 import com.jpademo.repository.VacantesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +29,12 @@ public class JpaDemoApplication implements CommandLineRunner {
     @Autowired
     private VacantesRepository repoVacantes;
 
+    @Autowired
+    private PerfilesRepository repoPerfiles;
+
+    @Autowired
+    private UsuariosRepository repoUsuarios;
+
     public static void main(String[] args) {
         SpringApplication.run(JpaDemoApplication.class, args);
     }
@@ -48,6 +57,7 @@ public class JpaDemoApplication implements CommandLineRunner {
         buscarTodosPaginacion();
         buscarVacantes();
         guardarVacante();
+        crearPerfilesAplicacion();
 //		eliminar();
 //		System.out.println(repo);
     }
@@ -170,5 +180,27 @@ public class JpaDemoApplication implements CommandLineRunner {
         vacante.setDetalles("Sin detalles");
         vacante.setCategoria(repoCategorias.getOne(1));
         repoVacantes.save(vacante);
+    }
+
+    private void crearPerfilesAplicacion() {
+        repoPerfiles.saveAll(getPerfilesAplicacion());
+    }
+
+    private List<Perfil> getPerfilesAplicacion() {
+        List<Perfil> lista = new LinkedList<Perfil>();
+        Perfil per1 = new Perfil();
+        per1.setPerfil("SUPERVISOR");
+
+        Perfil per2 = new Perfil();
+        per2.setPerfil("ADMINISTRADOR");
+
+        Perfil per3 = new Perfil();
+        per3.setPerfil("USUARIO");
+
+        lista.add(per1);
+        lista.add(per2);
+        lista.add(per3);
+
+        return lista;
     }
 }
