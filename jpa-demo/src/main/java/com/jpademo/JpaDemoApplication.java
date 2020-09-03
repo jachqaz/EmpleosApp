@@ -25,7 +25,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		guardar();
 		buscarPorId();
 		modificar();
-		eliminar();
+//		eliminar();
+		conteo();
 //		System.out.println(repo);
 	}
 
@@ -63,5 +64,10 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void eliminar() {
 		int idCategoria = 1;
 		repo.deleteById(idCategoria);
+	}
+
+	private void conteo() {
+		long count = repo.count();
+		System.out.println("Total Catergorias " + count);
 	}
 }
