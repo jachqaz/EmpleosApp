@@ -32,6 +32,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 		encontrarPorIds();
 		buscarTodos();
 		existeId();
+		guardarTodas();
 //		eliminar();
 //		System.out.println(repo);
 	}
@@ -97,5 +98,16 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void existeId() {
 		boolean existe = repo.existsById(14);
 		System.out.println("La categoria existe: " + existe);
+	}
+
+	private void guardarTodas() {
+		List<Categoria> lista = new LinkedList<>();
+		Categoria catTmp = new Categoria();
+		catTmp.setNombre("Ingenieria de software");
+		catTmp.setDescripcion("Desarrollo de Sistemas");
+		lista.add(catTmp);
+		lista.add(catTmp);
+		lista.add(catTmp);
+		repo.saveAll(lista);
 	}
 }
