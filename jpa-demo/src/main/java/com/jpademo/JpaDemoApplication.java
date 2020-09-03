@@ -24,6 +24,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 //		System.out.println("Ejemplos de Spring Data JPA");
 		guardar();
 		buscarPorId();
+		modificar();
 //		System.out.println(repo);
 	}
 
@@ -40,6 +41,19 @@ public class JpaDemoApplication implements CommandLineRunner {
 		Optional<Categoria> optional = repo.findById(1);
 		if (optional.isPresent()) {
 			System.out.println(optional.get());
+		} else {
+			System.out.println("Categoria no encontrada");
+		}
+	}
+
+	private void modificar() {
+		Optional<Categoria> optional = repo.findById(1);
+		if (optional.isPresent()) {
+			Categoria catTmp = optional.get();
+			catTmp.setNombre("Ingenieria de software");
+			catTmp.setDescripcion("Desarrollo de Sistemas");
+			repo.save(catTmp);
+			System.out.println(catTmp);
 		} else {
 			System.out.println("Categoria no encontrada");
 		}
