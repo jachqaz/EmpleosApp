@@ -30,6 +30,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 		buscarPorId();
 		modificar();
 		encontrarPorIds();
+		buscarTodos();
 //		eliminar();
 //		System.out.println(repo);
 	}
@@ -84,6 +85,11 @@ public class JpaDemoApplication implements CommandLineRunner {
 		ids.add(8);
 		ids.add(9);
 		Iterable<Categoria> categorias = repo.findAllById(ids);
+		categorias.forEach(System.out::println);
+	}
+
+	private void buscarTodos() {
+		Iterable<Categoria> categorias = repo.findAll();
 		categorias.forEach(System.out::println);
 	}
 }
