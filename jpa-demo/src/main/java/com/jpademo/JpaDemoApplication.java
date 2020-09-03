@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.LinkedList;
@@ -36,7 +38,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		existeId();
 		guardarTodas();
 		buscarTodosJpa();
-		buscarTodosOrdenados();
+        buscarTodosOrdenados();
+        buscarTodosPaginacion();
 //		eliminar();
 //		System.out.println(repo);
 	}
@@ -118,14 +121,28 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void buscarTodosJpa() {
 		List<Categoria> categorias = repo.findAll();
 		categorias.forEach(System.out::println);
-	}
+    }
 
-	private void borrarTodosEnBloque() {
-		repo.deleteAllInBatch();
-	}
+    private void borrarTodosEnBloque() {
+        repo.deleteAllInBatch();
+    }
 
-	private void buscarTodosOrdenados() {
-		List<Categoria> categorias = repo.findAll(Sort.by("id").descending());
-		categorias.forEach(System.out::println);
-	}
+    private void buscarTodosOrdenados() {
+        List<Categoria> categorias = repo.findAll(Sort.by("id").descending());
+        categorias.forEach(System.out::println);
+    }
+
+    private void buscarTodosPaginacion() {
+        Page<Categoria> page = repo.findAll(PageRequest.of(0, 5));
+        System.out.println("Total Registros: " + page.getTotalElements());
+        System.out.println("Total Paginas: " + page.getTotalPages());
+        page.getContent().forEach(categoria -> System.out.println(categoria.getId() + " " + categoria.getNombre()));
+    }
+
+//	private void buscarTodosPaginacionOrdenados(){
+//		Page<Categoria> page=repo.findAll(PageRequest.of(0,5),Sort.by("id"));
+//        System.out.println("Total Registros: "+page.getTotalElements());
+//        System.out.println("Total Paginas: "+page.getTotalPages());
+//		page.getContent().forEach(categoria -> System.out.println(categoria.getId()+" "+categoria.getNombre()));
+//	}
 }
