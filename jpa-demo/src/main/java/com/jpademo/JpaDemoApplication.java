@@ -61,6 +61,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         crearPerfilesAplicacion();
 //        crearUsuarioConDosPerfiles();
         buscarUsuario();
+        buscarVacantesPorEstatus();
+        buscarVacantesPorDestacadoEstatus();
 //		eliminar();
 //		System.out.println(repo);
     }
@@ -220,6 +222,19 @@ public class JpaDemoApplication implements CommandLineRunner {
         } else {
             System.out.println("Usuario no encontrado");
         }
+    }
+
+    private void buscarVacantesPorEstatus() {
+        List<Vacante> lista = repoVacantes.findByEstatus("Eliminada");
+        System.out.println("Registros encontrados: " + lista.size());
+        lista.forEach(vacante -> System.out.println(vacante.getId() + ": " + vacante.getNombre() + ": " + vacante.getEstatus()));
+    }
+
+    private void buscarVacantesPorDestacadoEstatus() {
+        List<Vacante> lista = repoVacantes.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
+        System.out.println("Registros encontrados: " + lista.size());
+        lista.forEach(vacante -> System.out.println(vacante.getId() + ": " + vacante.getNombre() + ": " + vacante.getEstatus() + ": " + vacante.getDestacado()));
+
     }
 
     private List<Perfil> getPerfilesAplicacion() {
