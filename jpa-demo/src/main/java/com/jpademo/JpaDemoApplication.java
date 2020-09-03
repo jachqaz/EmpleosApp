@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,7 @@ public class JpaDemoApplication implements CommandLineRunner {
         buscarTodosOrdenados();
         buscarTodosPaginacion();
         buscarVacantes();
+        guardarVacante();
 //		eliminar();
 //		System.out.println(repo);
     }
@@ -154,5 +156,19 @@ public class JpaDemoApplication implements CommandLineRunner {
     private void buscarVacantes() {
         List<Vacante> lista = repoVacantes.findAll();
         lista.forEach(vacante -> System.out.println(vacante.getId() + " " + vacante.getNombre() + "-> " + vacante.getCategoria().getNombre()));
+    }
+
+    private void guardarVacante() {
+        Vacante vacante = new Vacante();
+        vacante.setNombre("Profesor de Matematicas");
+        vacante.setDescripcion("Sin descripcion ");
+        vacante.setFecha(new Date());
+        vacante.setSalario(8500.0);
+        vacante.setEstatus("Aprobada");
+        vacante.setDestacado(0);
+        vacante.setImagen("escuela.png");
+        vacante.setDetalles("Sin detalles");
+        vacante.setCategoria(repoCategorias.getOne(1));
+        repoVacantes.save(vacante);
     }
 }
