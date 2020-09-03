@@ -63,6 +63,7 @@ public class JpaDemoApplication implements CommandLineRunner {
         buscarUsuario();
         buscarVacantesPorEstatus();
         buscarVacantesPorDestacadoEstatus();
+        buscarVacantesSalario();
 //		eliminar();
 //		System.out.println(repo);
     }
@@ -234,7 +235,12 @@ public class JpaDemoApplication implements CommandLineRunner {
         List<Vacante> lista = repoVacantes.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
         System.out.println("Registros encontrados: " + lista.size());
         lista.forEach(vacante -> System.out.println(vacante.getId() + ": " + vacante.getNombre() + ": " + vacante.getEstatus() + ": " + vacante.getDestacado()));
+    }
 
+    private void buscarVacantesSalario() {
+        List<Vacante> lista = repoVacantes.findBySalarioBetweenOrderBySalarioDesc(7000, 14000);
+        System.out.println("Registros encontrados: " + lista.size());
+        lista.forEach(vacante -> System.out.println(vacante.getId() + ": " + vacante.getNombre() + ": " + vacante.getSalario()));
     }
 
     private List<Perfil> getPerfilesAplicacion() {
