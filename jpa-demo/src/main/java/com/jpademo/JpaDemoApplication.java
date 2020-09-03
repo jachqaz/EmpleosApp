@@ -2,6 +2,7 @@ package com.jpademo;
 
 import com.jpademo.model.Categoria;
 import com.jpademo.model.Perfil;
+import com.jpademo.model.Usuario;
 import com.jpademo.model.Vacante;
 import com.jpademo.repository.CategoriasRepository;
 import com.jpademo.repository.PerfilesRepository;
@@ -58,6 +59,8 @@ public class JpaDemoApplication implements CommandLineRunner {
         buscarVacantes();
         guardarVacante();
         crearPerfilesAplicacion();
+//        crearUsuarioConDosPerfiles();
+        buscarUsuario();
 //		eliminar();
 //		System.out.println(repo);
     }
@@ -184,6 +187,39 @@ public class JpaDemoApplication implements CommandLineRunner {
 
     private void crearPerfilesAplicacion() {
         repoPerfiles.saveAll(getPerfilesAplicacion());
+    }
+
+    private void crearUsuarioConDosPerfiles() {
+        Usuario user = new Usuario();
+        user.setNombre("Ivan Tinajero");
+        user.setEmail("ivanetinajero@gmail.com");
+        user.setFechaRegistro(new Date());
+        user.setUsername("admin");
+        user.setPassword("admin");
+        user.setEstatus(1);
+
+        Perfil per1 = new Perfil();
+        per1.setId(2);
+
+        Perfil per2 = new Perfil();
+        per2.setId(3);
+
+        user.agregar(per1);
+        user.agregar(per2);
+
+        repoUsuarios.save(user);
+    }
+
+    private void buscarUsuario() {
+        Optional<Usuario> optional = repoUsuarios.findById(1);
+        if (optional.isPresent()) {
+            Usuario u = optional.get();
+            System.out.println("Usuario: " + u.getNombre());
+            System.out.println("Perfiles asignados");
+            u.getPerfiles().forEach(perfil -> System.out.println(perfil.getPerfil()));
+        } else {
+            System.out.println("Usuario no encontrado");
+        }
     }
 
     private List<Perfil> getPerfilesAplicacion() {
